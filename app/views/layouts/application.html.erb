@@ -22,11 +22,22 @@
     />
   </head>
   <body>
+    <%= render 'shared/alert' %>
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js">
+    </script>
+
+    <script>
+      $(document).ready(function (){
+        setTimeout(function(){
+          $('#notice_wrapper').fadeOut("fast",function(){
+            $(this).remove();
+          })
+        },2500);
+      });
     </script>
   </body>
 </html>

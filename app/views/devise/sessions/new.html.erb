@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row justify-content-center" style="margin-top: 20vh">
+    <div class="col-lg-6">
+      <div class="card p-3">
+        <div class="card-body">
+          <h2>Log in</h2>
+
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-inputs">
+              <div class="mt-2">
+                <%= f.input :email,
+                          label: false,
+                          placeholder: "Email",
+                          required: false,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" } %>
+              </div>
+              <div class="mt-2">
+                <%= f.input :password,
+                          label: false,
+                          placeholder: 'Password',
+                          required: false,
+                          input_html: { autocomplete: "current-password" } %>
+              </div>
+            </div>
+
+            <div class="form-actions mt-3">
+              <%= f.button :submit, "Log in", :class=>"btn btn-success btn-block" %>
+            </div>
+          <% end %>
+          <div class="mt-3">
+            <small class="text-muted">Don't have account? 
+              <%= link_to "Register", new_user_registration_path , :class=>"text-muted "%>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

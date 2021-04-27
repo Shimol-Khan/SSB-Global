@@ -16,39 +16,61 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to "Home", root_path, :class=>"nav-link active" %>
+          <%= link_to root_path, :class=>"nav-link active" do %>
+            <i class="fas fa-home text-custom"></i> Home
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to "Posts", "#", :class=>"nav-link" %>
+          <%= link_to "#", :class=>"nav-link active" do %>
+            <i class="fas fa-bullhorn text-custom"></i> Announcements
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to "Tracking", "#", :class=>"nav-link" %>
+          <%= link_to "#", :class=>"nav-link active" do %>
+            <i class="far fa-hand-pointer text-custom"></i> Tracking
+          <% end %>
         </li>
-        <!-- Navbar dropdown -->
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-mdb-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown
-          </a>
-          <!-- Dropdown menu -->
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-          </ul>
+        <li class="nav-item">
+          <%= link_to "#", :class=>"nav-link active" do %>
+            <i class="far fa-paper-plane text-custom"></i> Contact
+          <% end %>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <button class="btn btn-outline-success me-2" type="button">Login</button>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+             <i class="far fa-user"></i>
+              <% if current_user.name? %>
+                <%= current_user.name %>
+              <% else %>
+                <%= current_user.email %>
+              <% end %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <%= link_to edit_user_registration_path, :class=>"dropdown-item" do %>
+                  <i class="fas fa-cog text-custom"></i> Account Settings
+                <% end %>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <%= link_to destroy_user_session_path, method: :delete, :class=>"dropdown-item" do %>
+                  <i class="fas fa-sign-out-alt text-custom"></i> Log Out
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <%= link_to "Join Today", new_user_registration_path, :class=>"btn btn-outline-success me-2"%>
+        <% end %>
       </ul>
     </div>
   </div>
