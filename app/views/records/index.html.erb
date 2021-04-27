@@ -1,0 +1,59 @@
+<%= render 'shared/nav' %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div style="margin-top: 25px">
+        <%= link_to root_path,:class=>"btn btn-md btn-light" do %>
+          <i class="fas fa-angle-left"></i>
+        <% end %>
+        <%= link_to new_record_path,:class=>"btn btn-md btn-light" do %>
+            <i class="fas fa-plus-circle"></i>
+        <% end %>
+
+        <!-------------- Search ------------->
+        <span class="float-end">
+        <%= form_tag records_path, method: :get do %>
+          <%= text_field_tag :search, params[:search], :class=>'form-control ml-3 w-160', placeholder:'Search by Name' %>
+        <% end %>
+        </span>
+        <!-------------/ Search ------------->
+      </div>
+    </div>
+  </div>
+<hr class="mt-5">
+   <div class="row justify-content-center" style="margin-top: 10px">
+      <div class="col-lg-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Service</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @records.each do |record| %>
+          <tr>
+            <th scope="row"><%= record.id %></th>
+            <td><%= record.client_name %></td>
+            <td><%= record.client_email %></td>
+            <td><%= record.client_contact %></td>
+            <td><%= record.service %></td>
+            <td><span class="badge bg-primary"><%= record.status %></span></td>
+            <td>
+            <span><%= link_to 'Show', record, :class=>"btn btn-sm btn-primary" %></span>
+            <span class="px-2"><%= link_to 'Edit', edit_record_path(record), :class=>"btn btn-sm btn-info" %></span>
+            <span><%= link_to 'Destroy', record, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-sm btn-danger" %></span>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,73 @@
+
+<%= simple_form_for(@record) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="mt-2">
+      <%= f.input :client_name,
+        label: false,
+        placeholder: "Client's Name"
+      %>
+    </div>
+    <div class="mt-2">
+      <%= f.input :client_email,
+        label: false,
+        placeholder: "Client's Email"
+      %>
+    </div>
+    <div class="mt-2">
+      <%= f.input :client_contact,
+        label: false,
+        placeholder: "Client's Contact"
+      %>
+    </div>
+    <div class="mt-2">
+      <%= f.input :client_address,
+        label: false,
+        placeholder: "Client's Address"
+      %>
+    </div>
+
+    <div class="mt-2">
+      <%= f.input :service, collection: [
+        'Student Visa',
+        'Tourist Visa',
+        'Migration Visa',
+        'Air Ticket',
+        ],
+        prompt: "Please Select Service",
+        label: false
+      %>
+    </div>
+
+    <div class="mt-2">
+      <%= f.input :status, collection: [
+        'Checking Payment',
+        'Payment Received',
+        'Document Checking',
+        'Document Ready To Submit To Immigration',
+        'Application Approved',
+        'Application Rejected',
+        'Application Issues',
+        'In Processing',
+        ],
+        prompt: "Please Select Status",
+        label: false
+      %>
+    </div>
+    <div class="mt-2">
+      <%= f.input :description,
+        label: false,
+        placeholder: "Add optional description",
+        input_html:{rows: 5}
+      %>
+    </div>
+    <%= f.association :user, as: :hidden %>
+  </div>
+
+  <div class="form-actions mt-3">
+    <%= f.button :submit, :class=>"btn btn-primary" %>
+    <%= link_to "Back", records_path, :class=>"btn btn-light"%>
+  </div>
+<% end %>
