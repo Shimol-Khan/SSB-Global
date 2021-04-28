@@ -1,0 +1,33 @@
+
+<%= simple_form_for(@announcement) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="mt-2">
+      <%= f.input :title,
+        label: false,
+        placeholder: "Title"
+      %>
+    </div>
+    <div class="mt-2">
+      <%= f.input :body,
+        label: false,
+        placeholder: "Body",
+        input_html: { rows: 6}
+      %>
+    </div>
+    <div class="mt-2">
+      <%= f.input :link,
+        label: false,
+        placeholder: "Link / Reference"
+      %>
+    </div>
+    <%= f.association :user, as: :hidden %>
+  </div>
+
+  <div class="form-actions mt-3">
+    <%= f.button :submit, "Submit", :class=>"btn btn-primary" %>
+    <%= link_to "Back", announcements_path, :class=>"btn btn-light"%>
+  </div>
+<% end %>

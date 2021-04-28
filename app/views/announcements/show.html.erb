@@ -1,0 +1,31 @@
+<%= render 'shared/nav' %>
+
+<div class="container-fluid">
+  <div class="row justify-content-center" style="margin-top: 15vh">
+    <div class="col-lg-12">
+      <div class="card p-3">
+        <div class="card-body">
+          <h4><%= @announcement.title %></h4>
+          <p class="lead"><%= @announcement.body %></p>
+          <% if @announcement.link? %>
+            <div class="mt-4">
+              <span class="text-muted"><%= @announcement.link %></span>
+            </div>
+          <% end %>
+          <div class="mt-4">
+          <%= link_to 'Back', announcements_path %>
+          <% if current_user && current_user.admin? %>
+            |<%= link_to 'Edit', edit_announcement_path(@announcement) %> |
+          <% end %>
+
+          <% if current_user && current_user.admin? %>
+            <%= link_to 'Delete', announcement_path, method: :delete, data:{confirm: 'Are you sure?'} %> |
+            <%= link_to 'Add New announcement', new_announcement_path %>
+          <% end %>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
