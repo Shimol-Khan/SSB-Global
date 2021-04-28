@@ -84,6 +84,12 @@
               <% if current_user.admin? %>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
+                  <%= link_to rails_admin_path, :class=>"dropdown-item" do %>
+                    <i class="fas fa-tools text-custom mr-1"></i> My Admin
+                  <% end %>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
                   <%= link_to records_path, :class=>"dropdown-item" do %>
                     <i class="fas fa-database text-custom mr-1"></i> Manage Record
                   <% end %>
