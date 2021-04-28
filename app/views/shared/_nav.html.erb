@@ -33,11 +33,6 @@
               <% end %>
             </li>
           <% else %>
-          <li class="nav-item">
-            <%= link_to "#", :class=>"nav-link active" do %>
-              <i class="far fa-hand-pointer text-custom"></i> Tracking
-            <% end %>
-          </li>
             <li class="nav-item">
               <%= link_to contacts_path, :class=>"nav-link active" do %>
                 <i class="far fa-paper-plane text-custom"></i> My Contacts
@@ -46,7 +41,7 @@
           <% end %>
         <% else %>
           <li class="nav-item">
-            <%= link_to "#", :class=>"nav-link active" do %>
+            <%= link_to tracking_path, :class=>"nav-link active" do %>
               <i class="far fa-hand-pointer text-custom"></i> Tracking
             <% end %>
           </li>

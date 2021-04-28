@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     get '/users/password', to: 'devise/passwords#new'
   end
 
+  get '/tracking', to: 'records#track', as: :tracking
+  get '/result', to: 'records#result', as: :result
+
 end

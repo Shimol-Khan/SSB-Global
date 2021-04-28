@@ -1,9 +1,17 @@
 class RecordsController < ApplicationController
   before_action :set_record, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:track, :result]
 
   def index
     @records = Record.all.where(["client_name like ?", "%#{params[:search]}%"])
+  end
+
+  def track
+    @records = Record.all.where(["id like ? OR client_name like ?", "%#{params[:search]}%", "%#{params[:search]}%"]).limit(1)
+  end
+
+  def result
+    @records = Record.all.where(["id like ? OR client_name like ?", "%#{params[:search]}%", "%#{params[:search]}%"]).limit(1)
   end
 
   def show

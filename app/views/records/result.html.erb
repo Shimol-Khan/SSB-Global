@@ -1,0 +1,38 @@
+<%= render 'shared/nav' %>
+
+<div class="container-fluid">
+   <div class="row justify-content-center" style="margin-top: 20vh">
+      <div class="col-lg-7">
+        <% @records.each do |record| %>
+          <div class="card p-3">
+            <div class="card-body">
+              <h4 class="card-title">
+                # <%= record.id %>
+                <%= record.client_name %> | 
+                <%= record.service %>
+                <hr class="my-1">
+              </h4>
+              <p class="lead text-success"><%= record.status %></p>
+              <% if record.status == 'In Processing' %>
+                <small>Your application is being processed.</small>
+              <% elsif record.status == 'Checking Payment' %>
+                <small>We are checking your Payment.</small>
+              <% elsif record.status == 'Payment Received' %>
+                <small>We have received payment. We will proceed for next process.</small>
+              <% elsif record.status == 'Document Checking' %>
+                <small>We are checking your documents.</small>
+              <% elsif record.status == 'Document Ready To Submit To Immigration' %>
+                <small>We are in process to submit your application to immigration.</small>
+              <% elsif record.status == 'Application Approved' %>
+                <small>Congrats! Your application has been Approved.</small>
+              <% elsif record.status == 'Application Rejected' %>
+                <small>Sorry! Your application has been Rejected.</small>
+              <% elsif record.status == 'Application Issues' %>
+                <small>Your application has Issues, Please contact us.</small>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+   </div>
+</div>
