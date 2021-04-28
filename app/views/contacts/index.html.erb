@@ -1,0 +1,91 @@
+<%= render 'shared/nav' %>
+
+<% if current_user && current_user.admin? %>
+<div class="container-fluid">
+  <div class="mt-4">
+    <div class="alert alert-success" style="z-index: 999">We have found total
+    <%= @contacts.all.count %>
+    Messages</div>
+  </div>
+   <div class="row justify-content-center" style="margin-top: 10px">
+      <div class="col-lg-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="1">Date</th>
+            <th scope="col">Message</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @contacts.each do |contact| %>
+          <tr>
+          <td colspan="1"><%= contact.created_at.strftime("%B, %d, %Y")%></td>
+            <td><%= contact.message %></td>
+
+            <td><span class="badge bg-primary"><%= contact.status %></span></td>
+
+            <td>
+            <span><%= link_to 'Delete', contact, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-sm btn-danger" %></span>
+            </td>
+
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+   </div>
+</div>
+<% else %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div style="margin-top: 25px">
+        <%= link_to root_path,:class=>"btn btn-md btn-light" do %>
+          <i class="fas fa-angle-left"></i>
+        <% end %>
+        <%= link_to new_contact_path,:class=>"btn btn-md btn-light" do %>
+            <i class="fas fa-plus-circle"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <% if current_user.contacts.all.count > 0 %>
+    <div class="alert alert-success">We have found <%= current_user.contacts.count %> Messages</div>
+    <% else %>
+    <div class="alert alert-success">We haven't found any of your contact history</div>
+    <% end %>
+  </div>
+   <div class="row justify-content-center" style="margin-top: 10px">
+      <div class="col-lg-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="1">Date</th>
+            <th scope="col">Message</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% current_user.contacts.each do |contact| %>
+          <tr>
+          <td colspan="1"><%= contact.created_at.strftime("%B, %d, %Y")%></td>
+            <td><%= contact.message %></td>
+
+            <td><span class="badge bg-primary"><%= contact.status %></span></td>
+
+            <td>
+            <span><%= link_to 'Delete', contact, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-sm btn-danger" %></span>
+            </td>
+
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+   </div>
+</div>
+<% end %>

@@ -1,0 +1,22 @@
+
+<%= simple_form_for(@contact) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="mt-2">
+      <%= f.input :message,
+        label: false,
+        placeholder: "Your message ...",
+        input_html: { rows: 6}
+      %>
+    </div>
+    <%= f.association :user, as: :hidden %>
+  </div>
+
+  <div class="form-actions mt-3">
+    <%= f.button :submit, "Send", :class=>"btn btn-primary" %>
+    <%= link_to "Back", contacts_path, :class=>"btn btn-light"%>
+  </div>
+
+<% end %>
